@@ -1,0 +1,23 @@
+{
+    "name": "gsferro/powermodel",
+    "license": "MIT",
+    "tags" : ["Laravel", "Model", "Eloquent", "Easy"],
+    "description": "",
+    "authors": [
+        {
+            "name": "Guilherme Ferro",
+            "email": "gsferroti@gmail.com"
+        },
+        {
+            "name": "Gianclaudio Oliveira",
+            "email": "gianclaudiooliveira@yahoo.com.br"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Gsferro\\PowerModel\\": "src/"
+        },
+        "files": [
+        ]
+    }
+}
