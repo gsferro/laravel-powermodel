@@ -6,44 +6,48 @@ use Carbon\Carbon;
 
 trait PowerModel
 {
-    public function getAttribute( $key )
+    public function getAttribute($key)
     {
-        $suffix      = substr( $key, -4 );
-        $originalKey = $this->pwOriginalKey($key);
-
-        switch( $suffix )
-        {
+        switch (pwGetSufixo($key)) {
             /*
             |---------------------------------------------------
             | Datas
             |---------------------------------------------------
             */
             case "_fmt":
-                $value = parent::getAttribute( $originalKey );
-                $value = !empty( $value ) ? Carbon::parse( $value )->format( 'd/m/Y' ) : "";
+                $value = self::pwGetOriginalAttribute($key);
+                $value = !empty($value) ? Carbon::parse($value)->format('d/m/Y') : "";
             break;
             case "_fmr":
-                $value = parent::getAttribute( $originalKey );
-                $value = !empty( $value ) ? Carbon::parse( $value )->format( 'H:i' ) : "";
+                $value = self::pwGetOriginalAttribute($key);
+                $value = !empty($value) ? Carbon::parse($value)->format('H:i') : "";
             break;
             case "_rar":
-                $value = parent::getAttribute( $originalKey );
-                $value = !empty( $value ) ? Carbon::parse( $value )->format( 'H:i:s' ) : "";
+                $value = self::pwGetOriginalAttribute($key);
+                $value = !empty($value) ? Carbon::parse($value)->format('H:i:s') : "";
             break;
             case "_fdh":
-                $value = parent::getAttribute( $originalKey );
-                $value = !empty( $value ) ? Carbon::parse( $value )->format( 'd/m/Y H:i:s' ) : "";
+                $value = self::pwGetOriginalAttribute($key);
+                $value = !empty($value) ? Carbon::parse($value)->format('d/m/Y H:i:s') : "";
             break;
             case "_dhi":
-                $value = parent::getAttribute( $originalKey );
-                $value = !empty( $value ) ? Carbon::parse( $value )->format( 'd/m/Y H:i' ) : "";
+                $value = self::pwGetOriginalAttribute($key);
+                $value = !empty($value) ? Carbon::parse($value)->format('d/m/Y H:i') : "";
             break;
 
-            // TODO Format cpf|cnpj
-            /*case "_inc":
-                $value = parent::getAttribute( $originalKey );
-                $value = !empty( $value ) ? pwMaskCpf( $value )->format( 'd/m/Y H:i' ) : "";
-            break;*/
+            /*
+            |---------------------------------------------------
+            | CPF | CNPJ
+            |---------------------------------------------------
+            |
+            | Verifica se o valor é um cpf ou cnpj e coloca a
+            | mascara de acordo
+            |
+            */
+            case "_inc":
+                $value = self::pwGetOriginalAttribute($key);
+                $value = !empty($value) ? pwVerifyCpjCnpj($value) : "";
+            break;
 
             /*
             |---------------------------------------------------
@@ -51,15 +55,36 @@ trait PowerModel
             |---------------------------------------------------
             */
             case "_mbr": // money br
-                $value = parent::getAttribute( $originalKey );
-                $value = trim( $value ) != "" ? number_format($value, 2, ',', '.') : "";
+                $value = self::pwGetOriginalAttribute($key);
+                $value = !empty($value) ? pwMaskMoneyBr($value) : "";
             break;
 
+            /*
+            |---------------------------------------------------
+            | TODO
+            |---------------------------------------------------
+            |
+            | IP
+            | TelCel
+            |
+            */
+
             default:
-                $value = parent::getAttribute( $key );
+                $value = self::pwGetOriginalAttribute($key);
         }
 
         return $value;
+    }
+
+    /**
+     * Get original atribute
+     *
+     * @param string $key
+     * @return mixed
+     */
+    private static function pwGetOriginalAttribute(string $key)
+    {
+        return parent::getAttribute(pwOriginalKey($key));
     }
 
     /* TODO v2
@@ -93,9 +118,4 @@ trait PowerModel
 
         return parent::setAttribute( $key, $value );
     }*/
-
-    private function pwOriginalKey($key)
-    {
-        return substr($key, 0, -4);
-    }
 }
