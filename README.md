@@ -4,7 +4,7 @@ Forma elegante e eficiente de formatar campos de data, hora e afins ao exibir, c
 
 ### Instalação
 
-    composer require gsferro/porwermodel
+    composer require gsferro/powermodel
 
 ### Configurar Model
 
@@ -21,11 +21,11 @@ Na model coloquei a trait `PowerModel`
     # original
     $model->created_at // 2021-12-16 12:00:00
     # sufixo
-    $model->created_at_fdh // 16/12/2021 12:00:00
-    $model->created_at_dhi // 16/12/2021 12:00
-    $model->created_at_fmt // 16/12/2021
-    $model->created_at_fmr // 12:00
-    $model->created_at_rar // 12:00:00
+    $model->created_at_fdh // sufixo '_fdh' => 16/12/2021 12:00:00
+    $model->created_at_dhi // sufixo '_dhi' => 16/12/2021 12:00
+    $model->created_at_fmt // sufixo '_fmt' => 16/12/2021
+    $model->created_at_fmr // sufixo '_fmr' => 12:00
+    $model->created_at_rar // sufixo '_rar' => 12:00:00
     ```
 1. CPF | CNPJ
    - Verifica se o valor é um cpf ou cnpj e coloca a mascara de acordo
@@ -33,24 +33,24 @@ Na model coloquei a trait `PowerModel`
     # original
     $model->cpf // 12345678900
     # sufixo
-    $model->cpf_inc // 123.456.789-00
+    $model->cpf_inc // sufixo '_inc' => 123.456.789-00
     
     # original
     $model->cnpj // 12345678901234
     # sufixo
-    $model->cnpj_inc // 12.345.678/9012-34
+    $model->cnpj_inc // sufixo '_inc' => 12.345.678/9012-34
 
     # original
     $model->cpf_cnpj // 12345678900 | 12345678901234
     # sufixo
-    $model->cpf_cnpj_inc // 123.456.789-00 | 12.345.678/9012-34
+    $model->cpf_cnpj_inc // sufixo '_inc' => 123.456.789-00 | 12.345.678/9012-34
     ```
 1. Valor Monetário
     ```php
     # original
     $model->valor_unitario // 12345.67
     # sufixo
-    $model->valor_unitario_mbr // 12.345,67
+    $model->valor_unitario_mbr // sufixo '_mbr' =>  12.345,67
     ```
 ### Uso Avançado    
 
