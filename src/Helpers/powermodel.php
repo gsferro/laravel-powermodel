@@ -141,3 +141,22 @@ if (!function_exists('pwGetSufixo')) {
         return substr( $key, -4 );
     }
 }
+
+if (!function_exists('pwGetCollumnRelation')) {
+    /**
+     * Adiciona a mascara de moneyBr no $value
+     *
+     * @param string $key
+     * @return array
+     */
+    function pwGetCollumnRelation(string $key): array
+    {
+        return explode("_",
+            str_replace("_mbr", "",
+                str_replace("sum_", "",
+                    $key
+                )
+            ),
+            2);
+    }
+}

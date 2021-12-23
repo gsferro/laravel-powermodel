@@ -85,7 +85,23 @@ trait PowerModel
      */
     private function pwGetOriginalAttribute(string $key, bool $isOriginal = false)
     {
+        if (is_int(strpos("{$key}", '_sum_'))) {
+            return $this->pwSumValueRelationAttribute($key);
+        }
+
         return parent::getAttribute(!$isOriginal ? pwOriginalKey($key) : $key );
+    }
+
+    /**
+     * Faz o somatorio da coluna via relacionamento
+     *
+     * @param string $key
+     * @return float
+     */
+    private function pwSumValueRelationAttribute(string $key): float
+    {
+        $arrayKey = pwGetCollumnRelation($key);
+        return $this->{current($arrayKey)}()->sum(next($arrayKey)) ?? 0.00;
     }
 
     /* TODO v2
