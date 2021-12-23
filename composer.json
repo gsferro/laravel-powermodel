@@ -1,8 +1,9 @@
 {
     "name": "gsferro/powermodel",
+    "type": "library",
     "license": "MIT",
     "keywords" : ["Laravel", "Model", "Eloquent", "Easy", "Accessors"],
-    "description": "",
+    "description": "Forma elegante e eficiente de formatar campos de data, hora e afins ao exibir, colocando somente um sufixo no nome original do atributo sem precisar declarar Accessors e/ou Mutators dentro da model",
     "authors": [
         {
             "name": "Guilherme Ferro",
