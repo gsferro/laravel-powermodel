@@ -160,3 +160,20 @@ if (!function_exists('pwGetCollumnRelation')) {
             2);
     }
 }
+
+if (!function_exists('pwMaskEmail')) {
+    /**
+     * Retorna o email mascarado
+     * ex: foo@bar.com => f*****o@bar.com
+     *
+     * @param string $email
+     * @return string
+     */
+    function pwMaskEmail(string $email): string
+    {
+        return is_int(strpos($email, '@'))
+            ?  substr_replace($email, '*****', 1, strpos($email, '@') - 2)
+            : $email
+        ;
+    }
+}

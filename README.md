@@ -53,6 +53,20 @@ Na model coloquei a trait `PowerModel`
     # sufixo
     $model->valor_unitario_mbr // sufixo '_mbr' =>  12.345,67
     ```
+
+1. Email Mascarado
+    ```php
+    # original
+    $model->email // "fulano@exemplo.com"
+    # sufixo
+    $model->email_msk // sufixo '_msk' =>  "f*****o@exemplo.com"
+   
+    # Caso o campo não seja um email valido, devolvera o valor original:
+    $model->email // "fulano#exemplo.com"
+    # sufixo
+    $model->email_msk // sufixo '_msk' =>  "fulano#exemplo.com"
+    ```
+   
 ### Uso Avançado    
 
 ```php
