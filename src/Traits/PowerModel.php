@@ -15,23 +15,23 @@ trait PowerModel
             |---------------------------------------------------
             */
             case "_fmt":
-                $value = self::pwGetOriginalAttribute($key);
+                $value = $this->pwGetOriginalAttribute($key);
                 $value = !empty($value) ? Carbon::parse($value)->format('d/m/Y') : "";
             break;
             case "_fmr":
-                $value = self::pwGetOriginalAttribute($key);
+                $value = $this->pwGetOriginalAttribute($key);
                 $value = !empty($value) ? Carbon::parse($value)->format('H:i') : "";
             break;
             case "_rar":
-                $value = self::pwGetOriginalAttribute($key);
+                $value = $this->pwGetOriginalAttribute($key);
                 $value = !empty($value) ? Carbon::parse($value)->format('H:i:s') : "";
             break;
             case "_fdh":
-                $value = self::pwGetOriginalAttribute($key);
+                $value = $this->pwGetOriginalAttribute($key);
                 $value = !empty($value) ? Carbon::parse($value)->format('d/m/Y H:i:s') : "";
             break;
             case "_dhi":
-                $value = self::pwGetOriginalAttribute($key);
+                $value = $this->pwGetOriginalAttribute($key);
                 $value = !empty($value) ? Carbon::parse($value)->format('d/m/Y H:i') : "";
             break;
 
@@ -45,7 +45,7 @@ trait PowerModel
             |
             */
             case "_inc":
-                $value = self::pwGetOriginalAttribute($key);
+                $value = $this->pwGetOriginalAttribute($key);
                 $value = !empty($value) ? pwVerifyCpjCnpj($value) : "";
             break;
 
@@ -55,7 +55,7 @@ trait PowerModel
             |---------------------------------------------------
             */
             case "_mbr": // money br
-                $value = self::pwGetOriginalAttribute($key);
+                $value = $this->pwGetOriginalAttribute($key);
                 $value = !empty($value) ? pwMaskMoneyBr($value) : "";
             break;
 
@@ -70,7 +70,7 @@ trait PowerModel
             */
 
             default:
-                $value = self::pwGetOriginalAttribute($key);
+                $value = $this->pwGetOriginalAttribute($key, true);
         }
 
         return $value;
@@ -80,11 +80,12 @@ trait PowerModel
      * Get original atribute
      *
      * @param string $key
+     * @param bool $isOriginal
      * @return mixed
      */
-    private static function pwGetOriginalAttribute(string $key)
+    private function pwGetOriginalAttribute(string $key, bool $isOriginal = false)
     {
-        return parent::getAttribute(pwOriginalKey($key));
+        return parent::getAttribute(!$isOriginal ? pwOriginalKey($key) : $key );
     }
 
     /* TODO v2

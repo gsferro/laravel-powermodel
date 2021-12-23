@@ -67,8 +67,45 @@ Na model coloquei a trait `PowerModel`
     $model->sum_valor_total_estimado_mbr; // 1.234.567,89
 ```
 
+### Appends
+   Caso queria ao invocar a model, já exibir o Accessor, basta colocado no append:
+
+   - Usando o exemplo do [Uso avançado](#uso-avanado)
+
+   1. Sem append:
+   ```php
+    # Tinker
+    >>> $model = Model::first()
+    => {
+        id: "1",
+        created_at: "2021-12-10 15:19:20.697",
+        updated_at: "2021-12-10 15:19:20.697",
+      }
+    $model->sum_valor_total_estimado; // 123456.89
+    $model->sum_valor_total_estimado_mbr; // 1.234.567,89
+   ```
+
+   1. Com append na model
+   ```php
+    protected $appends = [
+        'sum_valor_total_estimado',
+        'sum_valor_total_estimado_mbr',
+    ]; 
+
+    # Tinker
+    >>> $model = Model::first()
+    => {
+        id: "1",
+        created_at: "2021-12-10 15:19:20.697",
+        updated_at: "2021-12-10 15:19:20.697",
+        +sum_valor_total_estimado: "123456.89",
+        +sum_valor_total_estimado_mbr: "1.234.567,89",
+      }
+   ```
+
 ### TODO
 1. No getAttribute
+   1. Prefixo para soma campo em um relacionamento
    1. IP
    1. TelCel
 1. Implementar para o setAtribute
