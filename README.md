@@ -7,6 +7,12 @@ Pode facilmente também exibir um somatório usando relacionamento, sem precisar
 
     composer require gsferro/powermodel
 
+- Caso de algum Problema por conta da sua versão do php (<8.0.0), execute:
+
+   ```text
+   composer require gsferro/powermodel --ignore-platform-reqs
+   ```
+
 ### Configurar Model
 
 Na model coloquei a trait `PowerModel`
