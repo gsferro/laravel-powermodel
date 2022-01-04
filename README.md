@@ -118,8 +118,8 @@ Na model coloquei a trait `PowerModel`
    
        # Invocando
        $model = Model::first();
-       $model->count_itens; // 12345689
-       $model->count_itens_nbr; // 123.456.789
+       $model->itens_count_relation; // 12345689
+       $model->itens_count_relation_nbr; // 123.456.789
    ```
    
    - Ou você pode simplesmente fazer assim:
