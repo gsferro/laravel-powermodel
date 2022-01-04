@@ -116,6 +116,19 @@ if (!function_exists('pwMaskMoneyBr')) {
     }
 }
 
+if (!function_exists('pwMaskNumBr')) {
+    /**
+     * Adiciona a mascara de moneyBr no $value
+     *
+     * @param int $value
+     * @return string
+     */
+    function pwMaskNumBr(int $value): string
+    {
+        return number_format($value, 0, ',', '.');
+    }
+}
+
 if (!function_exists('pwOriginalKey')) {
     /**
      * Adiciona a mascara de moneyBr no $value
@@ -144,12 +157,12 @@ if (!function_exists('pwGetSufixo')) {
 
 if (!function_exists('pwGetCollumnRelation')) {
     /**
-     * Adiciona a mascara de moneyBr no $value
+     * Pega a key gerada pela convenção do pacote
      *
      * @param string $key
      * @return array
      */
-    function pwGetCollumnRelation(string $key): array
+    function pwGetCollumnSumRelation(string $key): array
     {
         return explode("_",
             str_replace("_mbr", "",
@@ -161,10 +174,30 @@ if (!function_exists('pwGetCollumnRelation')) {
     }
 }
 
+if (!function_exists('pwGetCollumnCountRelation')) {
+    /**
+     * Pega a key gerada pela convenção do pacote
+     *
+     * @param string $key
+     * @return array
+     */
+    function pwGetCollumnCountRelation(string $key): array
+    {
+        return explode("_",
+            str_replace("_nbr", "",
+                str_replace("count_relation", "",
+                    $key
+                )
+            ),
+            2);
+    }
+}
+
 if (!function_exists('pwMaskEmail')) {
     /**
      * Retorna o email mascarado
      * ex: foo@bar.com => f*****o@bar.com
+     * TODO pegar a configuração da mascara do e-mail via config
      *
      * @param string $email
      * @return string
@@ -174,6 +207,6 @@ if (!function_exists('pwMaskEmail')) {
         return is_int(strpos($email, '@'))
             ?  substr_replace($email, '*****', 1, strpos($email, '@') - 2)
             : $email
-        ;
+            ;
     }
 }

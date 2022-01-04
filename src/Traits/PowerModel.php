@@ -61,6 +61,16 @@ trait PowerModel
 
             /*
             |---------------------------------------------------
+            | Valor Inteiro
+            |---------------------------------------------------
+            */
+            case "_nbr": // numero br
+                $value = $this->pwGetOriginalAttribute($key);
+                $value = !empty($value) ? pwMaskNumBr($value) : "";
+            break;
+
+            /*
+            |---------------------------------------------------
             | Email Mascarado
             |---------------------------------------------------
             */
@@ -99,6 +109,10 @@ trait PowerModel
             return $this->pwSumValueRelationAttribute($key);
         }
 
+        if (is_int(strpos("{$key}", 'count_relation'))) {
+            return $this->pwCountRelationAttribute($key);
+        }
+
         return parent::getAttribute(!$isOriginal ? pwOriginalKey($key) : $key );
     }
 
@@ -110,8 +124,20 @@ trait PowerModel
      */
     private function pwSumValueRelationAttribute(string $key): float
     {
-        $arrayKey = pwGetCollumnRelation($key);
+        $arrayKey = pwGetCollumnSumRelation($key);
         return $this->{current($arrayKey)}()->sum(next($arrayKey)) ?? 0.00;
+    }
+
+    /**
+     * Faz o count dos elementos do relacionamento
+     *
+     * @param string $key
+     * @return int
+     */
+    private function pwCountRelationAttribute(string $key): int
+    {
+        $arrayKey = pwGetCollumnCountRelation($key);
+        return $this->{current($arrayKey)}()->count() ?? 0;
     }
 
     /* TODO v2

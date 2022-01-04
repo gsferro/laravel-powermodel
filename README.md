@@ -34,7 +34,7 @@ Na model coloquei a trait `PowerModel`
     $model->created_at_fmr // sufixo '_fmr' => 12:00
     $model->created_at_rar // sufixo '_rar' => 12:00:00
     ```
-1. CPF | CNPJ
+1. CPF | CNPJ - `_inc`
    - Verifica se o valor é um cpf ou cnpj e coloca a mascara de acordo
    ```php 
     # original
@@ -52,16 +52,26 @@ Na model coloquei a trait `PowerModel`
     # sufixo
     $model->cpf_cnpj_inc // sufixo '_inc' => 123.456.789-00 | 12.345.678/9012-34
     ```
-1. Valor Monetário
+1. Valor Monetário - `_mbr` (float)
     ```php
     # original
     $model->valor_unitario // 12345.67
     # sufixo
     $model->valor_unitario_mbr // sufixo '_mbr' =>  12.345,67
     ```
-
-1. Email Mascarado
+   
+1. Valor Numerico - `_nbr` (int)
     ```php
+    # original
+    $model->valor_numerico // 1234567
+    # sufixo
+    $model->valor_numerico_nbr // sufixo '_nbr' =>  1.234.567
+    ```
+
+1. Email Mascarado - `_msk`
+    ```php
+    # TODO pegar a configuração da mascara do e-mail via config
+   
     # original
     $model->email // "fulano@exemplo.com"
     # sufixo
@@ -74,31 +84,54 @@ Na model coloquei a trait `PowerModel`
     ```
    
 ### Uso Avançado    
-
-```php
-    # Para fins de demonstração na Model vc tem um Accessors que faz a soma utilizando um relacionamento
-    public function getSumValorTotalEstimadoAttribute(): string
-    {
-        return $this->itens()->sum('valor_total_estimado') ?? 0.00;
-    }
-
-    # Invocando
-    $model = Model::first();
-    $model->sum_valor_total_estimado; // 123456.89
-    $model->sum_valor_total_estimado_mbr; // 1.234.567,89
-```
-
-- Ou você pode simplesmente fazer assim (`relation_sum_collumn_name`):
-
-```php
-    # Para fins de demonstração na Model vc tem um relacionamento chamado itens e nele um campo valor_estimado
-    # Invocando
-    $model = Model::first();
-    $model->itens_sum_valor_total_estimado; // 123456.89
-    # e ainda utilizar a formatação com o sufixo
-    $model->itens_sum_valor_total_estimado_mbr; // 1.234.567,89
-```
-
+- Sum - `<relationName>_sum_<collumn_name>`
+   ```php
+       # Para fins de demonstração na Model vc tem um Accessors que faz a soma utilizando um relacionamento
+       public function getSumValorTotalEstimadoAttribute(): string
+       {
+           return $this->itens()->sum('valor_total_estimado') ?? 0.00;
+       }
+   
+       # Invocando
+       $model = Model::first();
+       $model->sum_valor_total_estimado; // 123456.89
+       $model->sum_valor_total_estimado_mbr; // 1.234.567,89
+   ```
+   
+   - Ou você pode simplesmente fazer assim:
+   
+   ```php
+       # Para fins de demonstração na Model vc tem um relacionamento chamado itens
+       # Invocando
+       $model = Model::first();
+       $model->itens_sum_valor_total_estimado; // 123456.89
+       # e ainda utilizar a formatação com o sufixo
+       $model->itens_sum_valor_total_estimado_mbr; // 1.234.567,89
+   ```
+- Count - `<relationName>_count_relation`
+   ```php
+       # Para fins de demonstração na Model vc tem um Accessors que faz o count utilizando um relacionamento
+       public function getCountItensEstimadoAttribute(): string
+       {
+           return $this->itens()->count() ?? 0;
+       }
+   
+       # Invocando
+       $model = Model::first();
+       $model->count_itens; // 12345689
+       $model->count_itens_nbr; // 123.456.789
+   ```
+   
+   - Ou você pode simplesmente fazer assim:
+   
+   ```php
+       # Para fins de demonstração na Model vc tem um relacionamento chamado itens
+       # Invocando
+       $model = Model::first();
+       $model->itens_count_relation; // 12345689
+       # e ainda utilizar a formatação com o sufixo
+       $model->count_itens_nbr; // 123.456.789
+   ```
 
 ### Appends
    Caso queria ao invocar a model, já exibir o Accessor, basta colocado no append:
