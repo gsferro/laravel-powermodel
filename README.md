@@ -98,17 +98,17 @@ composer require gsferro/powermodel
     $model->email_msk // sufixo '_msk' =>  "fulano#exemplo.com"
     ```
 
-1. Ativo/Inativo - `_sia` - *Campo booleano*
+1. Ativo/Inativo - `_sai` - *Campo booleano*
     ```php
     # original
     $model->status // "1"
     # sufixo
-    $model->status_sia // sufixo '_sia' =>  "Ativo"
+    $model->status_sai // sufixo '_sai' =>  "Ativo"
    
     # original
     $model->status // "0"
     # sufixo
-    $model->status_sia // sufixo '_sia' =>  "inativo"
+    $model->status_sai // sufixo '_sai' =>  "inativo"
     ```
    
 1. Sim/Não - `_ssn` - *Campo booleano*

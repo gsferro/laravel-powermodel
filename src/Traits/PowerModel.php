@@ -84,7 +84,7 @@ trait PowerModel
             | Boolean A/I e S/N
             |---------------------------------------------------
             */
-            case "_sia":
+            case "_sai":
                 $value = $this->pwGetOriginalAttribute($key);
                 $value = !is_null($value) ?  pwAtivoInativo((int)$value) : "";
                 break;
