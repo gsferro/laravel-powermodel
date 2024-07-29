@@ -8,10 +8,6 @@
         {
             "name": "Guilherme Ferro",
             "email": "gsferroti@gmail.com"
-        },
-        {
-            "name": "Gianclaudio Oliveira",
-            "email": "gianclaudiooliveira@yahoo.com.br"
         }
     ],
     "autoload": {
