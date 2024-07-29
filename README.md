@@ -1,21 +1,36 @@
-# Laravel PowerModel
+<p align="center">
+    <img src="logo.png" alt="powermodel">
+    <p align="center">
+        <a href="https://packagist.org/packages/gsferro/powermodel"><img alt="Latest Version" src="https://img.shields.io/packagist/v/gsferro/powermodel"></a>
+        <a href="https://packagist.org/packages/gsferro/powermodel"><img alt="Total Downloads" src="https://img.shields.io/packagist/dt/gsferro/powermodel"></a>
+        <a href="https://packagist.org/packages/gsferro/powermodel"><img alt="License" src="https://img.shields.io/packagist/l/gsferro/powermodel"></a>
+    </p>
+</p>
+
+------
 
 Forma elegante e eficiente de formatar campos de data, hora e afins, colocando somente um sufixo no nome original do atributo sem precisar declarar Accessors e/ou Mutators dentro da model.
 Pode facilmente também exibir um somatório usando relacionamento, sem precisar declarar o Accessor, como visto no [Uso avançado](#uso-avanado)
 
 ### Instalação
 
-    composer require gsferro/powermodel
+```shell
+composer require gsferro/powermodel
+ ```
 
 - Caso de algum Problema por conta da sua versão do php (<8.0.0), execute:
 
-   ```text
+   ```shell 
    composer require gsferro/powermodel --ignore-platform-reqs
    ```
 
 ### Configurar Model
 
-Na model coloquei a trait `PowerModel`
+1. Na Model adicione a trait do pacote:
+    ```php
+    Use PowerModel;
+    ```
+
 
 ### Uso
 
@@ -81,6 +96,32 @@ Na model coloquei a trait `PowerModel`
     $model->email // "fulano#exemplo.com"
     # sufixo
     $model->email_msk // sufixo '_msk' =>  "fulano#exemplo.com"
+    ```
+
+1. Ativo/Inativo - `_sia` - *Campo booleano*
+    ```php
+    # original
+    $model->status // "1"
+    # sufixo
+    $model->status_sia // sufixo '_sia' =>  "Ativo"
+   
+    # original
+    $model->status // "0"
+    # sufixo
+    $model->status_sia // sufixo '_sia' =>  "inativo"
+    ```
+   
+1. Sim/Não - `_ssn` - *Campo booleano*
+    ```php
+    # original
+    $model->status // "1"
+    # sufixo
+    $model->status_ssn // sufixo `_ssn' =>  "Sim"
+   
+    # original
+    $model->status // "0"
+    # sufixo
+    $model->status_ssn // sufixo '_ssn' =>  "Não"
     ```
    
 ### Uso Avançado    

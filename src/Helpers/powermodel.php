@@ -210,3 +210,29 @@ if (!function_exists('pwMaskEmail')) {
             ;
     }
 }
+
+if (!function_exists('pwAtivoInativo')) {
+    /**
+     * Returns the string 'Ativo' if the input is truthy or equals to 1, otherwise returns 'Inativo'.
+     *
+     * @param int|bool $bool The input value to check.
+     * @return string The string 'Ativo' or 'Inativo'.
+     */
+    function pwAtivoInativo(int $bool): string
+    {
+        return $bool == 1 ? 'Ativo' : 'Inativo';
+    }
+}
+
+if (!function_exists('pwSimNao')) {
+    /**
+     * Returns 'Sim' if the given boolean value is 1, otherwise returns 'Não'.
+     *
+     * @param int $bool The boolean value to check.
+     * @return string The string 'Sim' if the boolean value is 1, otherwise 'Não'.
+     */
+    function pwSimNao(int $bool): string
+    {
+        return $bool == 1 ? 'Sim' : 'Não';
+    }
+}

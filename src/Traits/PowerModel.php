@@ -17,23 +17,23 @@ trait PowerModel
             case "_fmt":
                 $value = $this->pwGetOriginalAttribute($key);
                 $value = !empty($value) ? Carbon::parse($value)->format('d/m/Y') : "";
-            break;
+                break;
             case "_fmr":
                 $value = $this->pwGetOriginalAttribute($key);
                 $value = !empty($value) ? Carbon::parse($value)->format('H:i') : "";
-            break;
+                break;
             case "_rar":
                 $value = $this->pwGetOriginalAttribute($key);
                 $value = !empty($value) ? Carbon::parse($value)->format('H:i:s') : "";
-            break;
+                break;
             case "_fdh":
                 $value = $this->pwGetOriginalAttribute($key);
                 $value = !empty($value) ? Carbon::parse($value)->format('d/m/Y H:i:s') : "";
-            break;
+                break;
             case "_dhi":
                 $value = $this->pwGetOriginalAttribute($key);
                 $value = !empty($value) ? Carbon::parse($value)->format('d/m/Y H:i') : "";
-            break;
+                break;
 
             /*
             |---------------------------------------------------
@@ -47,7 +47,7 @@ trait PowerModel
             case "_inc":
                 $value = $this->pwGetOriginalAttribute($key);
                 $value = !empty($value) ? pwVerifyCpjCnpj($value) : "";
-            break;
+                break;
 
             /*
             |---------------------------------------------------
@@ -57,7 +57,7 @@ trait PowerModel
             case "_mbr": // money br
                 $value = $this->pwGetOriginalAttribute($key);
                 $value = !empty($value) ? pwMaskMoneyBr($value) : "";
-            break;
+                break;
 
             /*
             |---------------------------------------------------
@@ -67,7 +67,7 @@ trait PowerModel
             case "_nbr": // numero br
                 $value = $this->pwGetOriginalAttribute($key);
                 $value = !empty($value) ? pwMaskNumBr($value) : "";
-            break;
+                break;
 
             /*
             |---------------------------------------------------
@@ -77,7 +77,21 @@ trait PowerModel
             case "_msk":
                 $value = $this->pwGetOriginalAttribute($key);
                 $value = !empty($value) ? pwMaskEmail($value) : "";
-            break;
+                break;
+
+            /*
+            |---------------------------------------------------
+            | Boolean A/I e S/N
+            |---------------------------------------------------
+            */
+            case "_sia":
+                $value = $this->pwGetOriginalAttribute($key);
+                $value = !is_null($value) ?  pwAtivoInativo((int)$value) : "";
+                break;
+            case "_ssn":
+                $value = $this->pwGetOriginalAttribute($key);
+                $value = !is_null($value) ? pwSimNao((int)$value)  : "";
+                break;
 
             /*
             |---------------------------------------------------
