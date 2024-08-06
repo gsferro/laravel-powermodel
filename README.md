@@ -49,7 +49,7 @@ composer require gsferro/powermodel
     $model->created_at_fmr // sufixo '_fmr' => 12:00
     $model->created_at_rar // sufixo '_rar' => 12:00:00
     ```
-1. CPF | CNPJ - `_inc`
+1. CPF | CNPJ: `_inc`
    - Verifica se o valor é um cpf ou cnpj e coloca a mascara de acordo
    ```php 
     # original
@@ -67,7 +67,7 @@ composer require gsferro/powermodel
     # sufixo
     $model->cpf_cnpj_inc // sufixo '_inc' => 123.456.789-00 | 12.345.678/9012-34
     ```
-1. Valor Monetário - `_mbr` (float)
+1. Valor Monetário: `_mbr` (float)
     ```php
     # original
     $model->valor_unitario // 12345.67
@@ -75,7 +75,7 @@ composer require gsferro/powermodel
     $model->valor_unitario_mbr // sufixo '_mbr' =>  12.345,67
     ```
    
-1. Valor Numerico - `_nbr` (int)
+1. Valor Numerico: `_nbr` (int)
     ```php
     # original
     $model->valor_numerico // 1234567
@@ -83,7 +83,7 @@ composer require gsferro/powermodel
     $model->valor_numerico_nbr // sufixo '_nbr' =>  1.234.567
     ```
 
-1. Email Mascarado - `_msk`
+1. Email Mascarado: `_msk`
     ```php
     # TODO pegar a configuração da mascara do e-mail via config
    
@@ -98,7 +98,7 @@ composer require gsferro/powermodel
     $model->email_msk // sufixo '_msk' =>  "fulano#exemplo.com"
     ```
 
-1. Ativo/Inativo - `_sai` - *Campo booleano*
+1. Ativo / Inativo: `_sai` - (bool)
     ```php
     # original
     $model->status // "1"
@@ -111,7 +111,7 @@ composer require gsferro/powermodel
     $model->status_sai // sufixo '_sai' =>  "inativo"
     ```
    
-1. Sim/Não - `_ssn` - *Campo booleano*
+1. Sim / Não: `_ssn` - (bool)
     ```php
     # original
     $model->status // "1"
@@ -124,8 +124,21 @@ composer require gsferro/powermodel
     $model->status_ssn // sufixo '_ssn' =>  "Não"
     ```
    
+1. Habilitado / Desabilitado *(enable/disabled)*: `_sed` - (bool)
+    ```php
+    # original
+    $model->status // "1"
+    # sufixo
+    $model->status_sed // sufixo `_sed' =>  "Habilitado"
+   
+    # original
+    $model->status // "0"
+    # sufixo
+    $model->status_sed // sufixo '_sed' =>  "Desabilitado"
+    ```
+   
 ### Uso Avançado    
-- Sum - `<relationName>_sum_<collumn_name>`
+- Sum: `<relationName>_sum_<collumn_name>`
    ```php
        # Para fins de demonstração na Model vc tem um Accessors que faz a soma utilizando um relacionamento
        public function getSumValorTotalEstimadoAttribute(): string
@@ -149,7 +162,7 @@ composer require gsferro/powermodel
        # e ainda utilizar a formatação com o sufixo
        $model->itens_sum_valor_total_estimado_mbr; // 1.234.567,89
    ```
-- Count - `<relationName>_count_relation`
+- Count: `<relationName>_count_relation`
    ```php
        # Para fins de demonstração na Model vc tem um Accessors que faz o count utilizando um relacionamento
        public function getCountItensEstimadoAttribute(): string

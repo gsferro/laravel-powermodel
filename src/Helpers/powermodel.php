@@ -236,3 +236,16 @@ if (!function_exists('pwSimNao')) {
         return $bool == 1 ? 'Sim' : 'Não';
     }
 }
+
+if (!function_exists('pwdEnabledDisabled')) {
+    /**
+     * Returns the string 'Habilitado' if the given boolean value is 1, otherwise returns 'Desabilitado'.
+     *
+     * @param int $bool The boolean value to check.
+     * @return string The string 'Habilitado' if the boolean value is 1, otherwise 'Desabilitado'.
+     */
+    function pwdEnabledDisabled(int $bool): string
+    {
+        return $bool == 1 ? 'Habilitado' : 'Desabilitado';
+    }
+}

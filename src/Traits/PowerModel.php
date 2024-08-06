@@ -81,16 +81,25 @@ trait PowerModel
 
             /*
             |---------------------------------------------------
-            | Boolean A/I e S/N
+            | Boolean
             |---------------------------------------------------
+            |
+            | A/I = Ativo / Inativo
+            | S/N = Sim / Não
+            | E/D = Habilitado / Desabilitado
+            |
             */
             case "_sai":
                 $value = $this->pwGetOriginalAttribute($key);
-                $value = !is_null($value) ?  pwAtivoInativo((int)$value) : "";
+                $value = !is_null($value) ?  pwAtivoInativo((int)$value) : "-";
                 break;
             case "_ssn":
                 $value = $this->pwGetOriginalAttribute($key);
-                $value = !is_null($value) ? pwSimNao((int)$value)  : "";
+                $value = !is_null($value) ? pwSimNao((int)$value)  : "-";
+                break;
+            case "_sed":
+                $value = $this->pwGetOriginalAttribute($key);
+                $value = !is_null($value) ? pwdEnabledDisabled((int)$value)  : "-";
                 break;
 
             /*
