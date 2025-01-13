@@ -46,6 +46,7 @@ composer require gsferro/powermodel
     $model->created_at_fdh // sufixo '_fdh' => 16/12/2021 12:00:00
     $model->created_at_dhi // sufixo '_dhi' => 16/12/2021 12:00
     $model->created_at_fmt // sufixo '_fmt' => 16/12/2021
+    $model->created_at_fmy // sufixo '_fmy' => 16/12/21
     $model->created_at_fmr // sufixo '_fmr' => 12:00
     $model->created_at_rar // sufixo '_rar' => 12:00:00
     ```

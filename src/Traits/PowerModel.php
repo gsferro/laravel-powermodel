@@ -18,6 +18,10 @@ trait PowerModel
                 $value = $this->pwGetOriginalAttribute($key);
                 $value = !empty($value) ? Carbon::parse($value)->format('d/m/Y') : "";
                 break;
+            case "_fmy":
+                $value = $this->pwGetOriginalAttribute($key);
+                $value = !empty($value) ? Carbon::parse($value)->format('d/m/y') : "";
+                break;
             case "_fmr":
                 $value = $this->pwGetOriginalAttribute($key);
                 $value = !empty($value) ? Carbon::parse($value)->format('H:i') : "";
